@@ -2,6 +2,7 @@ package spring.boot.rest.rest.repository;
 
 import org.springframework.stereotype.Repository;
 import spring.boot.rest.rest.service.Authorities;
+import spring.boot.rest.rest.user.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,11 +14,11 @@ public class UserRepository {
     private ConcurrentHashMap<String, String> listAccaunt = new ConcurrentHashMap<>();
 
     public UserRepository() {
+        listAccaunt.put("Drims", "12345678");
     }
 
-    public List<Authorities> getUserAuthorities(String user, String password) {
-        listAccaunt.put("Drims", "1234");
-        if (listAccaunt.containsKey(user) && listAccaunt.get(user).contains(password)) {
+    public List<Authorities> getUserAuthorities(User user) {
+        if (listAccaunt.containsKey(user.getUser()) && listAccaunt.get(user.getUser()).contains(user.getPassword())) {
             return Arrays.asList(Authorities.values());
         } else {
             return new ArrayList<>(0);
